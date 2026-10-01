@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ฝึกสัญลักษณ์งานเชื่อมและรหัสลวด · PRE103 กลางภาค</title>
+<title>วิธีใช้เว็บ · PRE103 กลางภาค</title>
 <meta name="description" content="ทบทวน PRE103 Production Technology ภาคการศึกษาที่ 1/2569 Sheet Metal Forming และ Welding Technology เรียบเรียงโดย ชานุ วิภาพันธ์">
 <meta name="author" content="ชานุ วิภาพันธ์">
 <meta name="theme-color" content="#f4f2ec" media="(prefers-color-scheme: light)">
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="vendor/katex/katex.min.css">
 <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="" data-page="aws.html">
+<body class="" data-page="guide.html">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></symbol><symbol id="i-sheet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h7l4-8h7"/><path d="M3 20h7.6l4-8H21"/></symbol><symbol id="i-weld" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 14 10"/><path d="m12 8 4 4"/><path d="M17 3v3M20.5 5.5l-2 2M21 10h-3"/><circle cx="17.5" cy="6.5" r="1"/></symbol><symbol id="i-sigma" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4H6l6 8-6 8h12"/></symbol><symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol><symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></symbol><symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6.5"/></symbol><symbol id="i-cards" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="15" rx="2"/><path d="M8 3h11a2 2 0 0 1 2 2v13"/></symbol><symbol id="i-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15h13"/><path d="m16 15 5-8"/><path d="M7 15l2.5-4 2.5 4"/></symbol><symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></symbol><symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol><symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol><symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol><symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></symbol><symbol id="i-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol><symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/></symbol><symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".6"/></symbol><symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/></symbol><symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol><symbol id="i-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></symbol><symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol><symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16l13-8z"/></symbol><symbol id="i-reset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v6h6"/><path d="M20 12a8 8 0 1 1-2.3-5.7L4 10"/></symbol><symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></symbol><symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></symbol><symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol><symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol></defs></svg>
 <div id="loader" class="loader" aria-hidden="true"><div class="loader-inner">
   <svg class="loader-art" viewBox="0 0 150 74"><path class="sheet" d="M8 62 H52 L75 22 L98 62 H142"/><path class="spk" d="M75 14 v-10"/><path class="spk" d="M66 17 l-7 -7"/><path class="spk" d="M84 17 l7 -7"/><path class="spk" d="M62 24 l-9 -2"/><path class="spk" d="M88 24 l9 -2"/></svg>
@@ -34,11 +34,77 @@
   
 </header>
 <div class="shell">
-  <nav id="sidenav" class="sidenav" aria-label="เมนูหลัก"><div class="nav-group">เรียน</div><ul><li><a href="index.html"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg><span>หน้าแรก</span></a></li><li><a href="lesson-sheet-metal.html" data-track="L:sheet-metal"><svg class="ic" aria-hidden="true"><use href="#i-sheet"/></svg><span>Sheet Metal</span><span class="nav-prog" aria-hidden="true"></span></a></li><li><a href="lesson-welding.html" data-track="L:welding"><svg class="ic" aria-hidden="true"><use href="#i-weld"/></svg><span>Welding</span><span class="nav-prog" aria-hidden="true"></span></a></li><li><a href="formulas.html"><svg class="ic" aria-hidden="true"><use href="#i-sigma"/></svg><span>สูตรที่ต้องจำ</span></a></li></ul><div class="nav-group">ฝึก</div><ul><li><a href="exams.html" data-track="Q"><svg class="ic" aria-hidden="true"><use href="#i-doc"/></svg><span>ข้อสอบเก่า</span><span class="nav-prog" aria-hidden="true"></span></a></li><li><a href="calculators.html"><svg class="ic" aria-hidden="true"><use href="#i-calc"/></svg><span>เครื่องคำนวณ</span></a></li><li><a href="quiz.html"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>แบบทดสอบ</span></a></li><li><a href="flashcards.html" data-track="F"><svg class="ic" aria-hidden="true"><use href="#i-cards"/></svg><span>บอกชื่อกระบวนการ</span><span class="nav-prog" aria-hidden="true"></span></a></li><li><a href="aws.html" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-symbol"/></svg><span>สัญลักษณ์ AWS</span></a></li></ul><div class="nav-group">อื่น ๆ</div><ul><li><a href="guide.html"><svg class="ic" aria-hidden="true"><use href="#i-help"/></svg><span>วิธีใช้เว็บ</span></a></li><li><a href="downloads.html"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg><span>ดาวน์โหลด PDF</span></a></li></ul>
+  <nav id="sidenav" class="sidenav" aria-label="เมนูหลัก"><div class="nav-group">เรียน</div><ul><li><a href="index.html"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg><span>หน้าแรก</span></a></li><li><a href="lesson-sheet-metal.html" data-track="L:sheet-metal"><svg class="ic" aria-hidden="true"><use href="#i-sheet"/></svg><span>Sheet Metal</span><span class="nav-prog" aria-hidden="true"></span></a></li><li><a href="lesson-welding.html" data-track="L:welding"><svg class="ic" aria-hidden="true"><use href="#i-weld"/></svg><span>Welding</span><span class="nav-prog" aria-hidden="true"></span></a></li><li><a href="formulas.html"><svg class="ic" aria-hidden="true"><use href="#i-sigma"/></svg><span>สูตรที่ต้องจำ</span></a></li></ul><div class="nav-group">ฝึก</div><ul><li><a href="exams.html" data-track="Q"><svg class="ic" aria-hidden="true"><use href="#i-doc"/></svg><span>ข้อสอบเก่า</span><span class="nav-prog" aria-hidden="true"></span></a></li><li><a href="calculators.html"><svg class="ic" aria-hidden="true"><use href="#i-calc"/></svg><span>เครื่องคำนวณ</span></a></li><li><a href="quiz.html"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>แบบทดสอบ</span></a></li><li><a href="flashcards.html" data-track="F"><svg class="ic" aria-hidden="true"><use href="#i-cards"/></svg><span>บอกชื่อกระบวนการ</span><span class="nav-prog" aria-hidden="true"></span></a></li><li><a href="aws.html"><svg class="ic" aria-hidden="true"><use href="#i-symbol"/></svg><span>สัญลักษณ์ AWS</span></a></li></ul><div class="nav-group">อื่น ๆ</div><ul><li><a href="guide.html" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-help"/></svg><span>วิธีใช้เว็บ</span></a></li><li><a href="downloads.html"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg><span>ดาวน์โหลด PDF</span></a></li></ul>
     <div class="author-mini">พื้นที่การเรียนรู้ของ<br><b>ชานุ วิภาพันธ์</b><br>นักศึกษาภาควิชาวิศวกรรมไฟฟ้า มจธ.</div>
   </nav>
   <div class="scrim" data-close-nav></div>
-  <main id="main" tabindex="-1"><div class="wrap"><header class="page-head"><h1>สัญลักษณ์งานเชื่อม AWS และรหัสลวด</h1><p class="lead">อ่านสัญลักษณ์ให้คล่อง แล้วลองถอดรหัสลวดเชื่อมเอง</p></header><div id="aws-app"></div></div><script>window.__TOTALS={"Q":118,"F":46,"sheet-metal":51,"welding":49}</script></main>
+  <main id="main" tabindex="-1"><div class="wrap narrow">
+  <header class="page-head">
+    <p class="eyebrow">แนะนำการใช้งาน</p>
+    <h1>วิธีใช้เว็บนี้ให้คุ้มที่สุด</h1>
+    <p class="lead">ทุกอย่างทำงานในเบราว์เซอร์ ไม่ต้องสมัครสมาชิก ไม่ต้องล็อกอิน ความคืบหน้าเก็บในเครื่องที่ใช้อยู่</p>
+    <div class="hero-actions"><button class="btn btn-primary" type="button" data-open-tour><svg class="ic"><use href="#i-play"/></svg>ดูทัวร์แนะนำอีกครั้ง</button><a class="btn" href="lesson-sheet-metal.html">ไปบทที่ 1</a></div>
+  </header>
+
+  <h2 class="section-title">ลำดับที่แนะนำ (ก่อนสอบ 1 สัปดาห์)</h2>
+  <div class="card steps-guide stagger">
+    <div class="g-step"><div><b>วันที่ 1 ถึง 2: อ่าน Sheet Metal Forming</b><p>เน้นหัวข้อ 4 ถึง 6 (Clearance แรงตัด bend allowance แรงพับ) และหัวข้อ 3 กับ 9 สำหรับข้อดูรูป</p></div></div>
+    <div class="g-step"><div><b>วันที่ 3 ถึง 4: อ่าน Welding Technology</b><p>จำตารางท้ายบท "คำใบ้ในโจทย์ → กระบวนการ" ให้ได้ เพราะออกเติมคำ 20 ข้อทุกปี</p></div></div>
+    <div class="g-step"><div><b>วันที่ 5: ข้อสอบเก่าโหมด "ทำทีละขั้น"</b><p>ทำข้อคำนวณทุกข้อเอง ถ้าผิดให้ดูว่าผิดขั้นไหน แล้วกลับไปอ่านหัวข้อนั้น</p></div></div>
+    <div class="g-step"><div><b>วันที่ 6: สูตร + การ์ด + สัญลักษณ์ AWS</b><p>เปิดหน้าสูตรในโหมดทบทวน แล้วไล่การ์ดบอกชื่อกระบวนการให้ครบ</p></div></div>
+    <div class="g-step"><div><b>วันก่อนสอบ: แบบทดสอบสุ่มหลายรอบ</b><p>ตัวเลขเปลี่ยนทุกครั้ง ทำจนได้ 8/10 ขึ้นไปติดกัน</p></div></div>
+  </div>
+
+  <h2 class="section-title">ระบบ "ดูแล้ว" ทำงานอย่างไร</h2>
+  <div class="card legend">
+    <div class="legend-row"><span><button class="seen" type="button" tabindex="-1"><i class="dot live"></i>ดูแล้ว <time>วันนี้ 14:32</time></button></span><span>ป้ายนี้ขึ้นข้างหัวข้อเมื่อคุณอ่านหัวข้อนั้นค้างไว้ราว 3 วินาที หรือเลื่อนลงจนสุดหน้า จุดสีเขียวกระพริบบอกว่าบันทึกแล้ว เวลาที่แสดงคือเวลาที่ดูล่าสุด เอาเมาส์ชี้ (หรือกดค้าง) เพื่อดูเวลาที่ดูครั้งแรก</span></div>
+    <div class="legend-row"><span>แตะที่ป้าย</span><span>ยกเลิกเครื่องหมาย ถ้าอยากกลับมาอ่านหัวข้อนั้นใหม่</span></div>
+    <div class="legend-row"><span>ข้อสอบเก่า</span><span>ข้อที่กดดูเฉลย ตอบถูก/ผิด หรือทำทีละขั้นแล้ว จะติดป้ายดูแล้ว และแถบในแท็บแต่ละชุดบอกว่าดูไปกี่ข้อ</span></div>
+    <div class="legend-row"><span>เมนูซ้ายและหน้าแรก</span><span>บอกเปอร์เซ็นต์ที่ดูแล้วของแต่ละบท ปุ่ม "เรียนต่อจากตรงนี้" พาไปหัวข้อล่าสุด และรายการ "ดูล่าสุด" เรียงตามเวลา</span></div>
+    <div class="legend-row"><span><svg class="ic"><use href="#i-clock"/></svg> นาฬิกาด้านบน</span><span>บอกวันและเวลาปัจจุบัน หน้าแรกบอกว่าวันนี้ใช้เวลาเรียนไปกี่นาที (นับเฉพาะตอนเปิดหน้าอยู่และมีการเลื่อนหรือแตะ)</span></div>
+  </div>
+
+  <h2 class="section-title">ความหมายของกล่องสีในบทเรียน</h2>
+  <div class="legend">
+    <div class="legend-row"><aside class="box box-tip"><div class="box-title"><svg class="ic"><use href="#i-bulb"/></svg>เทคนิคจำ</div></aside><span>วิธีจำหรือเข้าใจให้ง่ายขึ้น</span></div>
+    <div class="legend-row"><aside class="box box-warn"><div class="box-title"><svg class="ic"><use href="#i-alert"/></svg>ระวัง</div></aside><span>จุดที่สไลด์หรือเฉลยรุ่นพี่ผิด พร้อมคำตอบที่ถูกและเหตุผล</span></div>
+    <div class="legend-row"><aside class="box box-exam"><div class="box-title"><svg class="ic"><use href="#i-target"/></svg>ออกสอบ</div></aside><span>ข้อสอบเก่าที่ถามเรื่องนี้ และควรตอบอย่างไร</span></div>
+    <div class="legend-row"><aside class="box box-extra"><div class="box-title"><svg class="ic"><use href="#i-book"/></svg>ควรรู้เพิ่ม</div></aside><span>เนื้อหาจากตำรามาตรฐานที่ไม่อยู่ในสไลด์ ช่วยให้เข้าใจลึกขึ้น</span></div>
+    <div class="legend-row"><aside class="box box-web"><div class="box-title"><svg class="ic"><use href="#i-globe"/></svg>อ่านเพิ่มจากเว็บ</div></aside><span>ลิงก์ไปแหล่งที่น่าเชื่อถือ (Wikipedia, TWI, NDT Resource Center, ผู้ผลิตเครื่องเชื่อม) เปิดในแท็บใหม่ ทุกลิงก์ตรวจแล้วว่าเปิดได้</span></div>
+  </div>
+
+  <h2 class="section-title">ปุ่มลัด</h2>
+  <div class="keys">
+    <div><kbd>/</kbd> เปิดช่องค้นหา</div>
+    <div><kbd>Esc</kbd> ปิดหน้าต่างหรือเมนู</div>
+    <div><kbd>←</kbd> <kbd>→</kbd> เลื่อนการ์ดบอกชื่อกระบวนการ</div>
+    <div><kbd>Enter</kbd> ส่งคำตอบในช่องตัวเลข</div>
+  </div>
+
+  <h2 class="section-title">คำถามที่พบบ่อย</h2>
+  <div class="faq">
+    <details><summary>เปลี่ยนเครื่องแล้วความคืบหน้าหาย</summary><p>ความคืบหน้าเก็บในเบราว์เซอร์ของเครื่องที่ใช้ ไม่ได้ส่งขึ้นเซิร์ฟเวอร์ จึงไม่ตามไปเครื่องอื่น และจะหายถ้าล้างข้อมูลเว็บหรือใช้โหมดไม่ระบุตัวตน</p></details>
+    <details><summary>ทำไมบางคำตอบในเว็บไม่ตรงกับเฉลยรุ่นพี่</summary><p>ทุกข้อคำนวณตรวจกับสูตรในสไลด์และคำนวณซ้ำด้วยโปรแกรม ถ้าไม่ตรงจะมีกล่อง "ระวัง" อธิบายว่าเฉลยเดิมพลาดตรงไหน</p></details>
+    <details><summary>ใช้บนมือถือได้ไหม</summary><p>ได้ มีแถบเมนูด้านล่างจอ และเพิ่มเว็บไว้ที่หน้าจอโฮมได้จากเมนู "แชร์" ของเบราว์เซอร์ แล้วเลือก "เพิ่มไปยังหน้าจอโฮม"</p></details>
+    <details><summary>อยากได้ฉบับพิมพ์</summary><p>ไปที่หน้า "ดาวน์โหลด PDF" มีทั้งเล่ม แยกบท ชีตสูตร 2 หน้า และข้อสอบเก่าพร้อมเฉลย</p></details>
+  </div>
+
+  <h2 class="section-title">ล้างประวัติ</h2>
+  <div class="card"><p style="margin-top:0">ลบป้าย "ดูแล้ว" เวลาเรียน และคะแนนทั้งหมดในเครื่องนี้ เพื่อเริ่มนับใหม่</p><button class="btn" type="button" data-reset><svg class="ic"><use href="#i-reset"/></svg>ล้างประวัติทั้งหมด</button></div>
+
+  <h2 class="section-title">ผู้เรียบเรียง</h2>
+  <section class="author" aria-label="ผู้เรียบเรียง">
+    <div class="avatar" aria-hidden="true">ชว</div>
+    <div>
+      <p class="author-role">ผู้เรียบเรียง</p>
+      <p class="author-name">ชานุ วิภาพันธ์</p>
+      <p class="author-meta">นักศึกษาภาควิชาวิศวกรรมไฟฟ้า มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี</p>
+      <div class="author-row"><span class="email">chanu.wipa@mail.kmutt.ac.th</span><button class="btn btn-sm" type="button" data-copy="chanu.wipa@mail.kmutt.ac.th"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-copy"/></svg>คัดลอกอีเมล</button></div>
+      
+    </div>
+  </section>
+</div>
+<script>window.__TOTALS={"Q":118,"F":46,"sheet-metal":51,"welding":49}</script></main>
 </div>
 <footer class="site-foot">
   <p>© 2569 (2026) ชานุ วิภาพันธ์ · นักศึกษาภาควิชาวิศวกรรมไฟฟ้า มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี · ใช้เพื่อการศึกษาเท่านั้น</p>
@@ -60,6 +126,6 @@
 <script>window.__QUOTES=[["เรียนทีละนิด แต่ทำทุกวัน ดีกว่าอ่านรวดเดียวคืนก่อนสอบ",""],["Measure twice, cut once.","สุภาษิตช่าง"],["ความรู้ที่ไม่ได้ลงมือทำ ก็เหมือนแผ่นเหล็กที่ยังไม่ได้พับ",""],["Strike while the iron is hot.","สุภาษิตอังกฤษ"],["สูตรจำได้ไม่ยาก ที่ยากคือรู้ว่าทำไมต้องใช้สูตรนั้น",""],["It always seems impossible until it is done.","Nelson Mandela"],["รอยเชื่อมที่ดีเริ่มจากการเตรียมรอยต่อที่ดี การสอบก็เหมือนกัน",""]];</script>
 
 <script type="module" src="js/app.js"></script>
-<script type="module" src="js/aws.js"></script>
+
 </body>
 </html>

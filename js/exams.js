@@ -2,6 +2,7 @@
 import { $, $$, esc, tex, pageData, store, stepsHtml, unitTex, checkNum, shuffle, fmtNum } from './lib.js';
 import { PROBLEMS } from './engine/problems.js';
 import { FORMULA_CHOICES } from './engine/formulas.js';
+import * as seen from './seen.js';
 
 const { exams } = pageData();
 const app = $('#exam-app');
@@ -9,23 +10,49 @@ const TYPE = { short: 'เขียนตอบ', id: 'ดูรูปตอบ'
 let state = { paper: location.hash.slice(1) || exams[0].id, filter: 'all' };
 if (!exams.some((p) => p.id === state.paper)) state.paper = exams[0].id;
 
+/** บันทึกว่าดูข้อนี้แล้ว + ติดป้ายเขียวบนการ์ด */
 function markSeen(key) {
+  const { p, q } = findQ(key);
+  seen.mark(`Q:${key}`, { title: `ข้อ ${q.no} ${p.title.split(' หมวด')[0]}`, href: `exams.html#${p.id}`, kind: 'ข้อสอบเก่า' });
   const s = new Set(store.get().examSeen || []);
   s.add(key);
   store.set({ examSeen: [...s] });
+  paintCard(key);
+  paintTabs();
 }
+function paintCard(key) {
+  const el = document.getElementById(`q-${key.replace(/[:.]/g, '-')}`);
+  if (!el) return;
+  const item = seen.get(`Q:${key}`);
+  el.classList.toggle('is-seen', !!item);
+  const h = $('.qhead', el);
+  $('.seen', h)?.remove();
+  if (item) h.insertAdjacentHTML('beforeend', seen.badge(`Q:${key}`, item));
+}
+function paperCount(p) { return p.questions.filter((q) => seen.get(`Q:${p.id}:${q.no}`)).length; }
+function paintTabs() {
+  $$('.paper-tab', app).forEach((t) => {
+    const p = exams.find((x) => x.id === t.dataset.paper);
+    const n = paperCount(p);
+    $('[data-tab-count]', t).textContent = n ? ` · ดูแล้ว ${n}` : '';
+    $('.bar > i', t).style.setProperty('--w', `${Math.round((n / p.questions.length) * 100)}%`);
+  });
+}
+addEventListener('seen:change', (e) => { if (e.detail.key.startsWith('Q:') || e.detail.key === '*') { paintTabs(); if (e.detail.key !== '*') paintCard(e.detail.key.slice(2)); else render(); } });
 
 function render() {
   const p = exams.find((x) => x.id === state.paper);
-  const qs = p.questions.filter((q) => state.filter === 'all' || (state.filter === 'calc' ? q.type === 'calc' : q.warn));
+  const qs = p.questions.filter((q) => state.filter === 'all' || (state.filter === 'calc' ? q.type === 'calc' : state.filter === 'todo' ? !seen.get(`Q:${p.id}:${q.no}`) : q.warn));
   app.innerHTML = `
-    <div class="paper-tabs" role="tablist">${exams.map((x) => `<button class="paper-tab ${x.id === p.id ? 'is-on' : ''}" role="tab" aria-selected="${x.id === p.id}" data-paper="${x.id}">${esc(x.title.split(' หมวด')[0])}<small>${x.topic === 'welding' ? 'Welding' : 'Sheet Metal'} · ${x.questions.length} ข้อ</small></button>`).join('')}</div>
-    <h2 style="margin:0 0 4px;font-size:1.2rem">${esc(p.title)}</h2>
+    <div class="paper-tabs" role="tablist">${exams.map((x) => `<button class="paper-tab ${x.id === p.id ? 'is-on' : ''}" role="tab" aria-selected="${x.id === p.id}" data-paper="${x.id}">${esc(x.title.split(' หมวด')[0])}<small>${x.topic === 'welding' ? 'Welding' : 'Sheet Metal'} · ${x.questions.length} ข้อ<span data-tab-count></span></small><div class="bar"><i></i></div></button>`).join('')}</div>
+    <h2 style="margin:0 0 4px;font-size:1.25rem">${esc(p.title)}</h2>
     <p class="paper-note">${esc(p.note || '')}</p>
     <div class="filters"><div class="seg" role="group" aria-label="กรองข้อ">
-      ${[['all', 'ทุกข้อ'], ['calc', 'เฉพาะข้อคำนวณ'], ['warn', 'ข้อที่เฉลยรุ่นพี่ผิด/ต้องระวัง']].map(([k, l]) => `<button type="button" class="seg-btn ${state.filter === k ? 'is-on' : ''}" data-filter="${k}">${l}</button>`).join('')}
+      ${[['all', 'ทุกข้อ'], ['todo', 'ยังไม่ได้ดู'], ['calc', 'เฉพาะข้อคำนวณ'], ['warn', 'เฉลยรุ่นพี่ผิด/ต้องระวัง']].map(([k, l]) => `<button type="button" class="seg-btn ${state.filter === k ? 'is-on' : ''}" data-filter="${k}">${l}</button>`).join('')}
     </div></div>
-    ${qs.length ? qs.map((q) => card(p, q)).join('') : '<p class="note">ชุดนี้ไม่มีข้อในหมวดที่เลือก</p>'}`;
+    ${qs.length ? qs.map((q) => card(p, q)).join('') : `<p class="note">${state.filter === 'todo' ? 'ดูครบทุกข้อในชุดนี้แล้ว เก่งมาก' : 'ชุดนี้ไม่มีข้อในหมวดที่เลือก'}</p>`}`;
+  qs.forEach((q) => paintCard(`${p.id}:${q.no}`));
+  requestAnimationFrame(paintTabs);
 }
 
 function card(p, q) {

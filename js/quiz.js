@@ -3,6 +3,7 @@ import { $, $$, esc, tex, pageData, store, stepsHtml, unitTex, checkNum, shuffle
 import * as f from './engine/formulas.js';
 import { lBracket, heatExam } from './engine/problems.js';
 import { flashcards } from './flashdata.js';
+import * as seen from './seen.js';
 
 const { exams } = pageData();
 const app = $('#quiz-app');
@@ -75,6 +76,7 @@ function finish() {
   const total = S.qs.length;
   const best = store.get().quizBest;
   if (!best || S.score / total >= best.score / best.total) store.set({ quizBest: { score: S.score, total } });
+  seen.mark('T:quiz', { title: `แบบทดสอบล่าสุด ได้ ${S.score}/${total}`, href: 'quiz.html', kind: 'แบบทดสอบ' });
   const msg = S.score / total >= 0.8 ? 'เยี่ยมมาก พร้อมสอบแล้ว' : S.score / total >= 0.5 ? 'ดีแล้ว ทวนข้อที่พลาดอีกนิด' : 'ค่อย ๆ ทวนบทเรียนแล้วลองใหม่ เดี๋ยวก็ได้';
   app.innerHTML = `<div class="quiz-card score"><p class="big">${S.score}/${total}</p><p>${msg}</p><div class="hero-actions" style="justify-content:center"><button class="btn btn-primary" data-start="${S.topic}">สุ่มชุดใหม่</button><a class="btn" href="exams.html">ไปดูข้อสอบเก่า</a></div></div>`;
 }
