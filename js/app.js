@@ -197,6 +197,7 @@ loaderDone.then(() => {
 });
 
 // ---------- ระบบ "ดูแล้ว" ในบทเรียน ----------
+let suppressId = null; // หัวข้อที่ผู้ใช้เพิ่งยกเลิก จะไม่ถูกบันทึกซ้ำจนกว่าจะเลื่อนออกไป
 const lesson = $('article.lesson');
 const lessonId = lesson?.dataset.lesson;
 const kOf = (h) => `L:${lessonId}:${h.id}`;
@@ -242,8 +243,8 @@ if (lesson) {
   setInterval(() => {
     if (document.hidden) return;
     const c = pick();
-    if (c !== current) { current = c; since = Date.now(); return; }
-    if (c && Date.now() - since >= 2500) markHead(c);
+    if (c !== current) { current = c; since = Date.now(); if (c?.id !== suppressId) suppressId = null; return; }
+    if (c && c.id !== suppressId && Date.now() - since >= 2500) markHead(c);
   }, 400);
   // สารบัญ: ไฮไลต์หัวข้อที่กำลังอ่าน
   const links = new Map($$('.toc a').map((a) => [a.getAttribute('href').slice(1), a]));
@@ -266,12 +267,12 @@ document.addEventListener('click', (e) => {
   seen.unmark(key);
   const h = b.closest('h2, h3');
   b.remove();
-  if (h) { const a = $(`.toc a[href="#${h.id}"] .dot`); a?.classList.add('off'); a?.classList.remove('live'); paintLessonProgress(); }
+  if (h) { suppressId = h.id; const a =$(`.toc a[href="#${h.id}"] .dot`); a?.classList.add('off'); a?.classList.remove('live'); paintLessonProgress(); }
   toast('ยกเลิกเครื่องหมาย "ดูแล้ว" แล้ว');
 });
 
 // ---------- หน้าเครื่องมือ: บันทึกการเข้าดู ----------
-const TOOL_PAGES = { 'formulas.html': 'สูตรที่ต้องจำ', 'calculators.html': 'เครื่องคำนวณ', 'quiz.html': 'แบบทดสอบ', 'flashcards.html': 'บอกชื่อกระบวนการ', 'aws.html': 'สัญลักษณ์ AWS', 'downloads.html': 'ดาวน์โหลด PDF', 'guide.html': 'วิธีใช้เว็บ', 'exams.html': 'ข้อสอบเก่า' };
+const TOOL_PAGES = { 'prep.html': 'เตรียมสอบ: ต้องเน้นอะไร', 'formulas.html': 'สูตรที่ต้องจำ', 'calculators.html': 'เครื่องคำนวณ', 'quiz.html': 'แบบทดสอบ', 'flashcards.html': 'บอกชื่อกระบวนการ', 'aws.html': 'สัญลักษณ์ AWS', 'downloads.html': 'ดาวน์โหลด PDF', 'guide.html': 'วิธีใช้เว็บ', 'exams.html': 'ข้อสอบเก่า' };
 if (TOOL_PAGES[PAGE]) setTimeout(() => seen.mark(`P:${PAGE}`, { title: TOOL_PAGES[PAGE], href: PAGE, kind: 'หน้า' }), 3000);
 
 // ---------- ความคืบหน้าในเมนู ----------
@@ -284,6 +285,7 @@ function paintNav() {
     if (t.startsWith('L:')) { n = keys.filter((k) => k.startsWith(t + ':')).length; total = TOTALS[t.slice(2)] || 0; }
     if (t === 'Q') { n = keys.filter((k) => k.startsWith('Q:')).length; total = TOTALS.Q || 0; }
     if (t === 'F') { n = keys.filter((k) => k.startsWith('F:')).length; total = TOTALS.F || 0; }
+    if (t === 'C') { n = keys.filter((k) => k.startsWith('C:')).length; total = TOTALS.C || 0; }
     if (!total || !n) { el.innerHTML = ''; return; }
     const pct = Math.min(100, Math.round((n / total) * 100));
     el.innerHTML = `<i class="dot ${pct >= 100 ? 'live' : ''}"></i>${pct}%`;
@@ -358,6 +360,79 @@ $$('[data-fmode]').forEach((b) => b.addEventListener('click', () => {
   $$('.fcard').forEach((c) => c.classList.remove('is-open'));
 }));
 document.addEventListener('click', (e) => { const r = e.target.closest('.fcard-reveal'); if (r) r.closest('.fcard').classList.add('is-open'); });
+
+// ---------- เช็กลิสต์เตรียมสอบ (หน้าเตรียมสอบ) ----------
+const checks = $$('input[data-check]');
+function paintChecks() {
+  const n = checks.filter((c) => c.checked).length;
+  $$('[data-check-progress]').forEach((el) => { el.textContent = `ทำได้แล้ว ${n}/${checks.length} ข้อ`; });
+  $$('[data-check-bar]').forEach((el) => el.style.setProperty('--w', `${checks.length ? Math.round((n / checks.length) * 100) : 0}%`));
+}
+function paintCheck(cb) {
+  const li = cb.closest('li');
+  $('.seen', li)?.remove();
+  const item = seen.get(cb.dataset.check);
+  cb.checked = !!item;
+  li.classList.toggle('is-done', !!item);
+  if (item) $('label', li).insertAdjacentHTML('afterend', `<span class="seen" style="cursor:default" title="ติ๊กเมื่อ ${seen.fullTime(item.last)}"><i class="dot live" aria-hidden="true"></i>ทำได้แล้ว <time>${seen.when(item.last)}</time></span>`);
+}
+checks.forEach((cb) => {
+  paintCheck(cb);
+  cb.addEventListener('change', () => {
+    const title = $('b', cb.closest('label'))?.textContent || 'เช็กลิสต์';
+    if (cb.checked) { seen.mark(cb.dataset.check, { title: `เช็กลิสต์: ${title}`, href: 'prep.html#checklist', kind: 'เตรียมสอบ' }); toast('<i class="dot live"></i> บันทึกแล้ว'); }
+    else seen.unmark(cb.dataset.check);
+    paintCheck(cb); paintChecks();
+  });
+});
+if (checks.length) paintChecks();
+
+// ---------- ยอดผู้เข้าชม/ดาวน์โหลด (เก็บในชีตเดียวกับ EEE270 แยกตัวนับ) ----------
+const API = 'https://script.google.com/macros/s/AKfycbwefV3ifZTWF8Ixre0l_QNAD_a49d5nsD5Kdyw0_-yCRLz-oaCGdb-45dpeWYd7RSnyGQ/exec';
+// ส่งเฉพาะบนเว็บจริง ไม่ส่งตอนทดสอบอัตโนมัติ ในเครื่อง หรือในหน้าตัวอย่าง
+const LIVE = location.hostname.endsWith('github.io') && !navigator.webdriver;
+function track(type, extra = {}) {
+  if (!LIVE) return;
+  const body = JSON.stringify({ action: 'track', site: 'pre103', type, page: PAGE, ...extra });
+  try { if (!navigator.sendBeacon || !navigator.sendBeacon(API, new Blob([body], { type: 'text/plain' }))) fetch(API, { method: 'POST', body, keepalive: true, mode: 'no-cors' }); } catch {}
+}
+try {
+  if (!sessionStorage.getItem('pre103-visit')) {
+    sessionStorage.setItem('pre103-visit', '1');
+    let first = false;
+    try { first = !localStorage.getItem('pre103-visitor'); localStorage.setItem('pre103-visitor', '1'); } catch {}
+    track('visit', { first });
+  }
+} catch {}
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href^="pdf/"]');
+  if (a) track('download', { file: a.getAttribute('href').slice(4) });
+});
+const nf = (n) => Number(n || 0).toLocaleString('th-TH');
+function countUp(el, to) {
+  if (reduced || !to) { el.textContent = nf(to); return; }
+  const t0 = performance.now(), d = 900;
+  const step = (t) => { const p = Math.min(1, (t - t0) / d); el.textContent = nf(Math.round(to * (1 - Math.pow(1 - p, 3)))); if (p < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+async function loadStats() {
+  const targets = $$('[data-stat]');
+  if (!targets.length) return;
+  let s = null;
+  try { const c = JSON.parse(sessionStorage.getItem('pre103-stats') || 'null'); if (c && Date.now() - c.at < 60000) s = c.s; } catch {}
+  if (!s) {
+    try {
+      const ctl = new AbortController(); setTimeout(() => ctl.abort(), 8000);
+      s = await (await fetch(`${API}?action=stats&site=pre103`, { signal: ctl.signal })).json();
+      if (s && s.ok) sessionStorage.setItem('pre103-stats', JSON.stringify({ at: Date.now(), s }));
+    } catch { s = null; }
+  }
+  if (!s || !s.ok) { $$('[data-stats-wrap]').forEach((w) => { w.hidden = true; }); return; }
+  $$('[data-stats-wrap]').forEach((w) => { w.hidden = false; });
+  targets.forEach((el) => countUp(el, s[el.dataset.stat]));
+  $$('[data-stat-updated]').forEach((el) => { el.textContent = seen.when(s.updated); });
+}
+if ('requestIdleCallback' in window) requestIdleCallback(loadStats, { timeout: 2500 }); else setTimeout(loadStats, 800);
 
 // ---------- ภาพเคลื่อนไหวหน้าแรก: หยุดถ้าผู้ใช้ตั้งค่าลดการเคลื่อนไหว ----------
 if (reduced) $$('svg.hero-art').forEach((s) => { try { s.pauseAnimations(); s.setCurrentTime(2.6); } catch {} });
